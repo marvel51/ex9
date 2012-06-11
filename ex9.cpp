@@ -21,6 +21,8 @@ class Sets{
     Sets operator== (Sets s2);
     Sets operator< (Sets s2);
     Sets operator> (Sets s2);
+    Sets operator<= (Sets s2);
+    Sets operator>= (Sets s2);
 
 
 };
@@ -99,6 +101,7 @@ main ()                                // test the functions
     Sets set0;
     Sets set1(MIN);
     Sets s3; //save results of the operators
+    Sets set4,set5,set6,set7; //for check comparition
     Sets Univer;
     for(int a=MIN;a<=MAX; a++){
         Univer.Insert(a);}
@@ -108,27 +111,71 @@ main ()                                // test the functions
         set0.Insert(a);}
     std::cout<<"Univ. Set: ";
     Univer.Print();
-    std::cout<<"set0:      ";
+    std::cout<<"Set0:      ";
     set0.Print();
-    std::cout<<"set1:      ";
+    std::cout<<"Set1:      ";
     set1.Print();
     s3=set0+set1;
-    std::cout<<"set0+Set1: ";
+    std::cout<<"Set0+Set1: ";
     s3.Print();
     s3=set0-set1;
-    std::cout<<"set0-Set1: ";
+    std::cout<<"Set0-Set1: ";
     s3.Print();
     s3=set0*set1;
-    std::cout<<"set0*Set1: ";
+    std::cout<<"Set0*Set1: ";
     s3.Print();
     std::cout<<"!Set1:     ";
     (-set1).Print();
-    std::cout<<"set1==Set1: ";
-    s3=set1==set1;
-    std::cout<<"set1<Set1: ";
-    s3=set1<Univer;
     set0.Member(14);
     set0.Member(15);
+
+//comparation   positive
+    set4.Insert(10);
+    set4.Insert(15);
+    set5.Insert(10);
+    set5.Insert(15);
+    set5.Insert(20);
+    std::cout<<"\n\nSet4:      ";
+    set4.Print();
+    std::cout<<"Set5:      ";
+    set5.Print();
+    std::cout<<"\n\nAll of this must give true: \n";
+    std::cout<<"Set4==Set4: ";
+    s3=set4==set4;
+    std::cout<<"Set4<Set5: ";
+    s3=set4<set5;
+    std::cout<<"Set4<=Set5: ";
+    s3=set4<=set5;
+    std::cout<<"Set4<=Set4: ";
+    s3=set4<=set4;
+    std::cout<<"Set5>Set4: ";
+    s3=set5>set4;
+    std::cout<<"Set5>=Set4: ";
+    s3=set5>=set4;
+    std::cout<<"Set4>=Set4: ";
+    s3=set4>=set4;
+
+//comparation  negative
+    set6.Insert(11);
+    set6.Insert(12);
+    set7.Insert(13);
+    set7.Insert(15);
+    set7.Insert(24);
+    std::cout<<"\n\nSet4:      ";
+    set4.Print();
+    std::cout<<"Set6:      ";
+    set6.Print();
+    std::cout<<"Set7:      ";
+    set7.Print();
+    std::cout<<"\n\nAll of this must give false: \n";
+    std::cout<<"Set4<Set4: ";
+    s3=set4<set4;
+    std::cout<<"Set6>Set7: ";
+    s3=set6>set7;
+    std::cout<<"Set4>Set4: ";
+    s3=set4>set4;
+    std::cout<<"Set7<Set6: ";
+    s3=set7<set6;
     return 0;
 }
 
@@ -180,19 +227,55 @@ else {cout<<"False"<<endl;}
 return (0);
 }
 
-Sets Sets::operator<(Sets s2){
+Sets Sets::operator>(Sets s2){
 bool Answer;
-Answer=true;
+Answer=false;
 for(int a=0; a<(MAX-MIN+1);a++){
-if(((Value[a]==true)&&(s2.Value[a]==true))||((Value[a]==false) & (s2.Value[a]==true))){
-            Answer=true;
-        }else{Answer=false;
-                break;
-                }
-}
+    if ((Value[a]!=s2.Value[a])&&(Value[a]>s2.Value[a])){
+        Answer=true;
+    }
+    }
 if (Answer==true){cout<<"True"<<endl;}
 else {cout<<"False"<<endl;}
 return (0);
 }
 
+Sets Sets::operator<(Sets s2){
+    bool Answer;
+    Answer=false;
+    for(int a=0; a<(MAX-MIN+1);a++){
+    if ((Value[a]!=s2.Value[a])&&(Value[a]<s2.Value[a])){
+        Answer=true;
+    }
+    }
+    if (Answer==true){cout<<"True"<<endl;}
+    else {cout<<"False"<<endl;}
+    return (0);
+}
 
+Sets Sets::operator<=(Sets s2){
+    bool Answer=true;
+    for(int a=0; a<(MAX-MIN+1);a++){
+    if((s2.Value[a]!=Value[a])||((Value[a]==true) & (s2.Value[a]==false))){
+                Answer=false;
+            }else{Answer=true;
+
+                    }
+    }
+    if (Answer==true){cout<<"True"<<endl;}
+    else {cout<<"False"<<endl;}
+    return (0);
+}
+
+Sets Sets::operator>=(Sets s2){
+    bool Answer=true;
+    for(int a=0; a<(MAX-MIN+1);a++){
+    if((s2.Value[a]!=Value[a])||((Value[a]==false) & (s2.Value[a]==true))){
+                Answer=false;
+            }else{Answer=true;
+                    }
+    }
+    if (Answer==true){cout<<"True"<<endl;}
+    else {cout<<"False"<<endl;}
+    return (0);
+}
