@@ -19,6 +19,9 @@ class Sets{
     Sets operator- ();
     Sets operator* (Sets s2);
     Sets operator== (Sets s2);
+    Sets operator< (Sets s2);
+    Sets operator> (Sets s2);
+
 
 };
 
@@ -122,6 +125,8 @@ main ()                                // test the functions
     (-set1).Print();
     std::cout<<"set1==Set1: ";
     s3=set1==set1;
+    std::cout<<"set1<Set1: ";
+    s3=set1<Univer;
     set0.Member(14);
     set0.Member(15);
     return 0;
@@ -171,6 +176,21 @@ if(s2.Value[a]!=Value[a]){
         }
 }
 if (Equals==true){cout<<"True"<<endl;}
+else {cout<<"False"<<endl;}
+return (0);
+}
+
+Sets Sets::operator<(Sets s2){
+bool Answer;
+Answer=true;
+for(int a=0; a<(MAX-MIN+1);a++){
+if(((Value[a]==true)&&(s2.Value[a]==true))||((Value[a]==false) & (s2.Value[a]==true))){
+            Answer=true;
+        }else{Answer=false;
+                break;
+                }
+}
+if (Answer==true){cout<<"True"<<endl;}
 else {cout<<"False"<<endl;}
 return (0);
 }
