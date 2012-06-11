@@ -2,7 +2,7 @@
 
 
 using namespace std;
-int const MAX=30,MIN=10;
+int const MAX=30,MIN=1;
 
 class Sets{
     bool *Value;
@@ -46,7 +46,7 @@ Sets::Sets(int n){
 
 
 void Sets::Print(){
-/*
+
 int comas=0;
 for(int a=0; a<(MAX-MIN+1);a++){
     if (Value[a]==true){
@@ -66,7 +66,7 @@ for(int a=0; a<(MAX-MIN+1);a++){
         }
 }
 cout<<"}"<<endl;
-*/
+/*
 cout<<"{";
 for(int a=0; a<(MAX-MIN+1);a++){
             if (a!=0){
@@ -76,7 +76,7 @@ for(int a=0; a<(MAX-MIN+1);a++){
 }
 cout<<"}"<<endl;
 
-//*/
+*/
 
 
 }
@@ -142,13 +142,13 @@ main ()                                // test the functions
     std::cout<<"\n\nAll of this must give true: \n";
     std::cout<<"Set4==Set4: ";
     s3=set4==set4;
-    std::cout<<"Set4<Set5: ";
+    std::cout<<"Set4<Set5:  ";
     s3=set4<set5;
     std::cout<<"Set4<=Set5: ";
     s3=set4<=set5;
     std::cout<<"Set4<=Set4: ";
     s3=set4<=set4;
-    std::cout<<"Set5>Set4: ";
+    std::cout<<"Set5>Set4:  ";
     s3=set5>set4;
     std::cout<<"Set5>=Set4: ";
     s3=set5>=set4;
@@ -228,27 +228,33 @@ return (0);
 }
 
 Sets Sets::operator>(Sets s2){
-bool Answer;
-Answer=false;
-for(int a=0; a<(MAX-MIN+1);a++){
-    if ((Value[a]!=s2.Value[a])&&(Value[a]>s2.Value[a])){
-        Answer=true;
+int Answer;
+    Answer=0;
+    for(int a=0; a<(MAX-MIN+1);a++){
+    if ((Value[a]<s2.Value[a])){
+        Answer--;
+    }
+    if ((Value[a]>s2.Value[a])){
+        Answer++;
     }
     }
-if (Answer==true){cout<<"True"<<endl;}
-else {cout<<"False"<<endl;}
-return (0);
+    if (Answer>0){cout<<"True"<<endl;}
+    else {cout<<"False"<<endl;}
+    return (0);
 }
 
 Sets Sets::operator<(Sets s2){
-    bool Answer;
-    Answer=false;
+    int Answer;
+    Answer=0;
     for(int a=0; a<(MAX-MIN+1);a++){
-    if ((Value[a]!=s2.Value[a])&&(Value[a]<s2.Value[a])){
-        Answer=true;
+    if ((Value[a]<s2.Value[a])){
+        Answer++;
+    }
+    if ((Value[a]>s2.Value[a])){
+        Answer--;
     }
     }
-    if (Answer==true){cout<<"True"<<endl;}
+    if (Answer>0){cout<<"True"<<endl;}
     else {cout<<"False"<<endl;}
     return (0);
 }
@@ -259,7 +265,6 @@ Sets Sets::operator<=(Sets s2){
     if((s2.Value[a]!=Value[a])||((Value[a]==true) & (s2.Value[a]==false))){
                 Answer=false;
             }else{Answer=true;
-
                     }
     }
     if (Answer==true){cout<<"True"<<endl;}
@@ -279,3 +284,6 @@ Sets Sets::operator>=(Sets s2){
     else {cout<<"False"<<endl;}
     return (0);
 }
+
+
+
